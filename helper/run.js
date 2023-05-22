@@ -2,6 +2,7 @@ const child_process = require("child_process");
 const path = require('path');
 const fs = require('fs');
 const colors = require("colors");
+const mocha = require("mocha");
 
 /**
  * @param {*} CLI_KEYS 
@@ -18,9 +19,10 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
     throw new Error('Run from project root direcory: njs2 run'.red);
 
   const packageJson = require(`${path.resolve(process.cwd(), `package.json`)}`);
-  if (packageJson['njs2-type'] != 'project') {
-    throw new Error('Run from project root direcory: njs2 run'.red);
-  }
+  // console.log(packageJson)
+  // if (packageJson['njs2-type'] != 'project') {
+  //   throw new Error('Run from project root direcory: njs2 run'.red);
+  // }
 
   // Creates postman.json that can be imported in postman
   require('./update-postman').updatePostman();
@@ -36,6 +38,11 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
     case 'nodemon':
       child_process.exec('./node_modules/.bin/nodemon express.js').stdout.pipe(process.stdin);
       child_process.exec('./node_modules/.bin/nodemon socketio.js').stdout.pipe(process.stdin);
+      break;
+
+    case 'test':
+      child_process.exec('node ./testGenerator.js').stdout.pipe(process.stdin);
+      child_process.exec('mocha \"./src/test/**/*.test.js\"').stdout.pipe(process.stdin);
       break;
 
     case 'express':

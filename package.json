@@ -22,6 +22,7 @@
     "follow-redirects": "^1.14.4",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.0",
+    "mocha": "^10.2.0",
     "tar": "^6.1.0",
     "xml-js": "^1.6.11"
   },
