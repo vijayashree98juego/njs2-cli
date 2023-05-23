@@ -44,7 +44,7 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
 
     case 'test':
       await generateTest();
-      child_process.exec(`mocha \"./src/test/**/*.test.js\"  --reporter ${CustomReporter}`).stdout.pipe(process.stdin);
+      child_process.execSync(` npm i mocha && mocha \"./src/test/**/*.test.js\"  --reporter ${CustomReporter}`).stdout.pipe(process.stdin);
       break;
 
     case 'express':
