@@ -63,10 +63,11 @@ const generateTest = async () => {
         fs.mkdirSync(path.resolve(process.cwd(),folderToCreated));
     }
 
-    /*giving write access to file*/
-    fs.chmodSync(path.resolve(process.cwd(),fileToCreate), 0o666);
-
+   
     fs.writeFileSync(path.resolve(process.cwd(),fileToCreate), initialCode = "", "utf-8");
+
+     /*giving write access to file*/
+     fs.chmodSync(path.resolve(process.cwd(),fileToCreate), 0o666);
 
     //test
     fs.writeFileSync(path.resolve(process.cwd(),customTestFileToCreate), initialCode = "", "utf-8");
