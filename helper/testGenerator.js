@@ -5,7 +5,6 @@ const fileToCreate = folderToCreated + "/njs2.test.js";
 let customTestFileToCreate = folderToCreated + "/custom.test.js";
 let testTemplate = [];
 let testCaseData = [];
-const child_process = require('child_process')
 
 let defaultTemplate = [`
 const supertest = require("supertest");
@@ -23,7 +22,7 @@ afterEach((done) => {
   
 beforeEach(async()=>{
     console.log = () => { };
-    server = require("./express");
+    server = require("../../express");
     superTestAgent = await supertest(server);
 })
 `];
