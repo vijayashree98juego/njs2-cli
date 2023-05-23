@@ -5,6 +5,7 @@ const fileToCreate = folderToCreated + "/njs2.test.js";
 let customTestFileToCreate = folderToCreated + "/custom.test.js";
 let testTemplate = [];
 let testCaseData = [];
+const child_process = require('child_process')
 
 let defaultTemplate = [`
 const supertest = require("supertest");
@@ -58,17 +59,17 @@ const generateTest = async () => {
         .map((dirent) => dirent.name);
 
     //create folder before file creation
-    if (!fs.existsSync(folderToCreated)) {
-        fs.mkdirSync(folderToCreated);
+    if (!fs.existsSync(path.resolve(process.cwd(),folderToCreated))) {
+        fs.mkdirSync(path.resolve(process.cwd(),folderToCreated));
     }
 
     /*giving write access to file*/
-    fs.chmodSync(fileToCreate, 0o666);
+    fs.chmodSync(path.resolve(process.cwd(),fileToCreate), 0o666);
 
-    fs.writeFileSync(fileToCreate, initialCode = "", "utf-8");
+    fs.writeFileSync(path.resolve(process.cwd(),fileToCreate), initialCode = "", "utf-8");
 
     //test
-    fs.writeFileSync(customTestFileToCreate, initialCode = "", "utf-8");
+    fs.writeFileSync(path.resolve(process.cwd(),customTestFileToCreate), initialCode = "", "utf-8");
 
 
     apiPaths.map((apiPath) => {
@@ -231,7 +232,7 @@ const generateTest = async () => {
     testTemplate.map((test, index) => {
         if (test) {
             index != 0 ? test = "\n" + test : null;
-            fs.appendFileSync(customTestFileToCreate, test, "utf-8");
+            fs.appendFileSync(path.resolve(process.cwd(),customTestFileToCreate), test, "utf-8");
         }
     });
 
