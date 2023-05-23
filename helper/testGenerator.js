@@ -59,18 +59,19 @@ const generateTest = async () => {
         .map((dirent) => dirent.name);
 
     //create folder before file creation
-    if (!fs.existsSync(path.resolve(process.cwd(),folderToCreated))) {
-        fs.mkdirSync(path.resolve(process.cwd(),folderToCreated));
+    if (!fs.existsSync(path.resolve(process.cwd(), folderToCreated))) {
+        fs.mkdirSync(path.resolve(process.cwd(), folderToCreated));
     }
 
-   
-    fs.writeFileSync(path.resolve(process.cwd(),fileToCreate), initialCode = "", "utf-8");
+    if (!fs.existsSync(path.resolve(process.cwd(), fileToCreate))) {
+        fs.writeFileSync(path.resolve(process.cwd(), fileToCreate), initialCode = "", "utf-8");
+    }
 
-     /*giving write access to file*/
-     fs.chmodSync(path.resolve(process.cwd(),fileToCreate), 0o666);
+    /*giving write access to file*/
+    fs.chmodSync(path.resolve(process.cwd(), fileToCreate), 0o666);
 
     //test
-    fs.writeFileSync(path.resolve(process.cwd(),customTestFileToCreate), initialCode = "", "utf-8");
+    fs.writeFileSync(path.resolve(process.cwd(), customTestFileToCreate), initialCode = "", "utf-8");
 
 
     apiPaths.map((apiPath) => {
@@ -233,7 +234,7 @@ const generateTest = async () => {
     testTemplate.map((test, index) => {
         if (test) {
             index != 0 ? test = "\n" + test : null;
-            fs.appendFileSync(path.resolve(process.cwd(),customTestFileToCreate), test, "utf-8");
+            fs.appendFileSync(path.resolve(process.cwd(), customTestFileToCreate), test, "utf-8");
         }
     });
 
