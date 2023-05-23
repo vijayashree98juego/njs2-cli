@@ -252,5 +252,4 @@ const generateTest = async () => {
 
 
 module.exports.generateTest = generateTest;
-generateTest()
 

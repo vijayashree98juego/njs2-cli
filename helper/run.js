@@ -3,6 +3,8 @@ const path = require('path');
 const fs = require('fs');
 const colors = require("colors");
 const mocha = require("mocha");
+const { generateTest } = require('./testGenerator');
+const { CustomReporter } = require('./testReportGenerator');
 
 /**
  * @param {*} CLI_KEYS 
@@ -41,8 +43,8 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
       break;
 
     case 'test':
-      child_process.exec('node ./testGenerator.js').stdout.pipe(process.stdin);
-      child_process.exec('mocha \"./src/test/**/*.test.js\"  --reporter "./testReportGenerator.js"').stdout.pipe(process.stdin);
+      await generateTest();
+      child_process.exec(`mocha \"./src/test/**/*.test.js\"  --reporter ${CustomReporter}`).stdout.pipe(process.stdin);
       break;
 
     case 'express':
