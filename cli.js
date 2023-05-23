@@ -108,3 +108,4 @@ njs2 library <folder-name> <filename> <options : [sql,mongo]>
 njs2 upgrade [version] [version-number]`);
     break;
 }
+
