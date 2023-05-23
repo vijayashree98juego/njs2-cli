@@ -5,6 +5,7 @@ const colors = require("colors");
 const mocha = require("mocha");
 const { generateTest } = require('./testGenerator');
 const { CustomReporter } = require('./testReportGenerator');
+const testReporter = path.resolve('./testReportGenerator');
 
 /**
  * @param {*} CLI_KEYS 
@@ -48,7 +49,7 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
       child_process.exec(`npm i supertest`).stdout.pipe(process.stdin);
       child_process.exec(`npm i chai`).stdout.pipe(process.stdin);
       child_process.exec(`npm i mocha`).stdout.pipe(process.stdin);
-      child_process.exec(`mocha \"./src/test/**/*.test.js\" `).stdout.pipe(process.stdin);
+      child_process.exec(`mocha \"./src/test/**/*.test.js\" --reporter ${testReporter} `).stdout.pipe(process.stdin);
       console.log(CustomReporter)
       break;
 
