@@ -132,6 +132,7 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('No input fields ', async () => {\n` +
                         `         let { body, statusCode } = await superTestAgent.post('/${apiPath}');\n` +
+                        `         console.log("body content"+body)`
                         `         expect(statusCode).to.be.equal(200);`
                     );
                     if (requiredFields.length) {
@@ -147,6 +148,7 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('Validating input Fields ${Object.keys(requestFields).toString().replaceAll(',', ' and ')}', async () => {\n` +
                         `        let { body, statusCode } = await superTestAgent.post('/${apiPath}').send(${JSON.stringify(requestFields)});\n` +
+                        `         console.log("body content"+body)`
                         `        expect(statusCode).to.be.equal(200);`
                     )
 
@@ -176,6 +178,7 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('No input fields ', async () => {\n` +
                         `        let { body, statusCode } = await superTestAgent.get('/${apiPath}');\n` +
+                        `         console.log("body content"+body)`
                         `        expect(statusCode).to.be.equal(200);`
                     )
 
@@ -192,6 +195,7 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('Validating input Fields ${Object.keys(requestFields).toString().replaceAll(',', ' and ')}', async () => {\n` +
                         `        let { body, statusCode } = await superTestAgent.get('/${apiPath}').query(${JSON.stringify(requestFields)});\n` +
+                        `        console.log("body content"+body)`
                         `        expect(statusCode).to.be.equal(200);`
                     );
 
