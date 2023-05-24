@@ -1,7 +1,7 @@
 const Mocha = require('mocha');
 const colors = require('colors');
 const path = require('path');
-
+console.log("inside the test generator file")
 class CustomReporter extends Mocha.reporters.Base {
     constructor(runner) {
         super(runner);
