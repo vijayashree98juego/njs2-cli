@@ -1,12 +1,10 @@
 const Mocha = require('mocha');
 const colors = require('colors');
 const path = require('path');
-console.log("inside the test generator file")
 class CustomReporter extends Mocha.reporters.Base {
     constructor(runner) {
         super(runner);
         // Track the test results
-        console.log("test generator constructor")
         process.stdout.write(colors.blue(`Test Report\n\n`));
         try {
             let failedEndPoints = [];
@@ -63,7 +61,6 @@ class CustomReporter extends Mocha.reporters.Base {
                     process.stdout.write(colors.white(`\n\tNone\n`));
 
                 }
-                console.log(colors.blue(`\nReport Summary:\n \n\tTotal Methods: ${testFileCount}\n`));
 
                 process.stdout.write(colors.blue(`\nReport Summary:\n`));
                 process.stdout.write(colors.white(`\n\tTotal Methods: ${testFileCount}\n`));
@@ -82,6 +79,6 @@ class CustomReporter extends Mocha.reporters.Base {
     }
 }
 
-module.exports =  CustomReporter;
+module.exports = CustomReporter;
 
 
