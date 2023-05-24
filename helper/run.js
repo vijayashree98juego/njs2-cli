@@ -28,9 +28,9 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
 
   // Runs the lint proccess for syntax validations
   child_process.execSync('npm run lint', { stdio: 'inherit' });
- const cliFilePath = `~/.nvm/versions/node/${process.version}/lib/node_modules/@juego/njs3-cli`;
+  const cliFilePath = `~/.nvm/versions/node/${process.version}/lib/node_modules/@juego/njs3-cli`;
 
-//  const testReporterInstance = new testReportFilePath();
+  //  const testReporterInstance = new testReportFilePath();
   switch (CLI_ARGS[0]) {
     case 'serverless':
       child_process.execSync('sls offline start --noPrependStageInUrl', { stdio: 'inherit' });
@@ -43,10 +43,8 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
 
     case 'test':
       await generateTest();
-      child_process.exec(`npm i supertest`).stdout.pipe(process.stdin);
-      child_process.exec(`npm i chai`).stdout.pipe(process.stdin);
-      child_process.exec(`npm i mocha`).stdout.pipe(process.stdin);
-      child_process.exec(`${cliFilePath}/node_modules/.bin/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js --recursive true`).stdout.pipe(process.stdin);
+      child_process.execSync(`npm i supertest chai mocha `, { stdio: '' });
+      child_process.exec(` mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
       break;
 
     case 'express':
