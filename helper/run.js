@@ -19,9 +19,9 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
 
   const packageJson = require(`${path.resolve(process.cwd(), `package.json`)}`);
   // console.log(packageJson)
-  // if (packageJson['njs2-type'] != 'project') {
-  //   throw new Error('Run from project root direcory: njs2 run'.red);
-  // }
+  if (packageJson['njs2-type'] != 'project') {
+    throw new Error('Run from project root direcory: njs2 run'.red);
+  }
 
   // Creates postman.json that can be imported in postman
   require('./update-postman').updatePostman();
@@ -44,7 +44,7 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
       child_process.exec(`npm i supertest`).stdout.pipe(process.stdin);
       child_process.exec(`npm i chai`).stdout.pipe(process.stdin);
       child_process.exec(`npm i mocha`).stdout.pipe(process.stdin);
-      child_process.exec(`mocha \"./src/test/**/*.test.js\" `).stdout.pipe(process.stdin);
+      child_process.exec(`mocha \"./src/test/**/*.test.js\" --reporter  '~/vijayashree/.nvm/versions/node/${process.version}/lib/node_modules/@juego/njs3-cli/helper/testGenerator.js' `).stdout.pipe(process.stdin);
       break;
 
     case 'express':
