@@ -28,7 +28,7 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
 
   // Runs the lint proccess for syntax validations
   child_process.execSync('npm run lint', { stdio: 'inherit' });
- const testReportFilePath = require(`~/.nvm/versions/node/${process.version}/lib/node_modules/@juego/njs3-cli/helper/testReportGenerator.js`).testReporter();
+ const testReportFilePath = require(`~/.nvm/versions/node/${process.version}/lib/node_modules/@juego/njs3-cli/helper/testReportGenerator.js`);
 
 //  const testReporterInstance = new testReportFilePath();
   switch (CLI_ARGS[0]) {
