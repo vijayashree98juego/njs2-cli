@@ -75,8 +75,6 @@ const generateTest = async () => {
 
 
     apiPaths.map((apiPath) => {
-        // customTestFileToCreate = folderToCreated + `/${apiPath}.test.js`
-        // fs.writeFileSync(customTestFileToCreate, initialCode = "", "utf-8");
         const apiInit = require(path.resolve(
             process.cwd(),
             `src/methods/${apiPath}/init.js`
@@ -131,7 +129,6 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('No input fields ', async () => {\n` +
                         `         let { body, statusCode } = await superTestAgent.post('/${apiPath}');\n` +
-                        `         console.log("body content"+body);\n` +
                         `         expect(statusCode).to.be.equal(200);`
                     );
                     if (requiredFields.length) {
@@ -147,7 +144,6 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('Validating input Fields ${Object.keys(requestFields).toString().replaceAll(',', ' and ')}', async () => {\n` +
                         `        let { body, statusCode } = await superTestAgent.post('/${apiPath}').send(${JSON.stringify(requestFields)});\n` +
-                        `         console.log("body content"+body);\n` +
                         `        expect(statusCode).to.be.equal(200);`
                     )
 
@@ -177,7 +173,6 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('No input fields ', async () => {\n` +
                         `        let { body, statusCode } = await superTestAgent.get('/${apiPath}');\n` +
-                        `         console.log("body content"+body);\n` +
                         `        expect(statusCode).to.be.equal(200);`
                     )
 
@@ -194,7 +189,6 @@ const generateTest = async () => {
                     testCaseData.push(
                         `    it('Validating input Fields ${Object.keys(requestFields).toString().replaceAll(',', ' and ')}', async () => {\n` +
                         `        let { body, statusCode } = await superTestAgent.get('/${apiPath}').query(${JSON.stringify(requestFields)});\n` +
-                        `        console.log("body content"+body);\n` +
                         `        expect(statusCode).to.be.equal(200);`
                     );
 
@@ -210,21 +204,6 @@ const generateTest = async () => {
             })
             testCaseData.push(`})`);
         }
-        // testTemplate = [`/*Custom test file*/`, ...defaultTemplate];
-        // testTemplate.push(
-        //     `describe('${apiPath}', () => {` +
-        //     `it('Sample test case', async () => {` +
-        //     `/* write test here */` +
-        //     `})\n` +
-        //     `})`
-        // );
-        // testTemplate.map((test, index) => {
-        //     if (test) {
-        //         index != 0 ? test = "\n" + test : null;
-        //         fs.appendFileSync(customTestFileToCreate, test, "utf-8");
-        //     }
-        // });
-        // testTemplate = [];
     })
 
     testTemplate = [`/*Custom test file*/`, ...defaultTemplate];
@@ -254,8 +233,6 @@ const generateTest = async () => {
     /*removing write access from file*/
     fs.chmodSync(fileToCreate, 0o500);
 };
-
-
 
 
 module.exports.generateTest = generateTest;
