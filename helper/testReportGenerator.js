@@ -82,7 +82,6 @@ class CustomReporter extends Mocha.reporters.Base {
     }
 }
 
-module.exports = CustomReporter;
-
+module.exports.testReporter = CustomReporter;
 
 
