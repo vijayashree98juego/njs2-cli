@@ -100,6 +100,7 @@ njs2 endpoint <endpoint-name>
 njs2 run serverless
 njs2 run express
 njs2 run nodemon
+njs2 run test
 njs2 plugin <plugin-name>
 njs2 plugin uninstall <plugin-name>
 njs2 plugin compile
