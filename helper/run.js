@@ -47,7 +47,6 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
       child_process.exec(`npm i chai`).stdout.pipe(process.stdin);
       child_process.exec(`npm i mocha`).stdout.pipe(process.stdin);
       child_process.exec(`${cliFilePath}/node_modules/.bin/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js --recursive true`).stdout.pipe(process.stdin);
-      console.log("jiisi")
       break;
 
     case 'express':
