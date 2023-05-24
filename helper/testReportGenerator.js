@@ -6,14 +6,14 @@ class CustomReporter extends Mocha.reporters.Base {
     constructor(runner) {
         super(runner);
         // Track the test results
-
+        console.log("test generator constructor")
         process.stdout.write(colors.blue(`Test Report\n\n`));
         try {
             let failedEndPoints = [];
             let failedCount = 0;
             let parentName = '';
             let currentFile;
-            let testFileCount= 0;
+            let testFileCount = 0;
 
             // Listen for test events
             runner.on('pass', ({ parent, title, file }) => {
@@ -24,7 +24,7 @@ class CustomReporter extends Mocha.reporters.Base {
                 if (parentName != parent.title) {
                     process.stdout.write(colors.white(`\n\tOn Method : ${parent.title} \n\n`));
                 }
-                if (currentFile == '' || currentFile != path.basename(file)){
+                if (currentFile == '' || currentFile != path.basename(file)) {
                     currentFile = path.basename(file);
                     testFileCount++;
                 }
@@ -37,9 +37,9 @@ class CustomReporter extends Mocha.reporters.Base {
 
             runner.on('fail', ({ parent, title, file }) => {
                 if (currentFile != path.basename(file)) {
-                    process.stdout.write(colors.yellow(`\n /-----/ On executing ${path.basename(file)} /-----/ \n`));              
+                    process.stdout.write(colors.yellow(`\n /-----/ On executing ${path.basename(file)} /-----/ \n`));
                 }
-                if (currentFile == '' || currentFile != path.basename(file)){
+                if (currentFile == '' || currentFile != path.basename(file)) {
                     currentFile = path.basename(file);
                     testFileCount++;
                 }
@@ -56,13 +56,15 @@ class CustomReporter extends Mocha.reporters.Base {
             runner.on('end', () => {
                 process.stdout.write(colors.red(`\nFailed Methods:\n\n`));
                 if (failedEndPoints.length) {
-                    failedEndPoints.map((endPoint,index) => {
-                        process.stdout.write(colors.red(`\t${index+1}. ${endPoint}\n`));
+                    failedEndPoints.map((endPoint, index) => {
+                        process.stdout.write(colors.red(`\t${index + 1}. ${endPoint}\n`));
                     })
                 } else {
                     process.stdout.write(colors.white(`\n\tNone\n`));
 
                 }
+                console.log(colors.blue(`\nReport Summary:\n \n\tTotal Methods: ${testFileCount}\n`));
+
                 process.stdout.write(colors.blue(`\nReport Summary:\n`));
                 process.stdout.write(colors.white(`\n\tTotal Methods: ${testFileCount}\n`));
                 process.stdout.write(colors.white(`\n\tTotal Suits: ${this.stats.suites}\n`));
