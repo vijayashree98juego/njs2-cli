@@ -43,7 +43,7 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
 
     case 'test':
       await generateTest();
-      child_process.execSync(`npm i supertest chai mocha `, { stdio: '' });
+      child_process.execSync(`npm i --save-dev supertest chai mocha `, { stdio: '' });
       child_process.exec(`mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
       break;
 
