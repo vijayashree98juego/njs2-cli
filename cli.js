@@ -95,18 +95,18 @@ njs2 upgrade [version] [version-number]`);
 
   default:
     console.log(`
-njs2 project <project-name> [version] [version-number] 
-njs2 endpoint <endpoint-name>
-njs2 run serverless
-njs2 run express
-njs2 run nodemon
-njs2 run test
-njs2 plugin <plugin-name>
-njs2 plugin uninstall <plugin-name>
-njs2 plugin compile
-njs2 plugin install [<plugin-name>]
-njs2 library <folder-name> <filename> <options : [sql,mongo]>
-njs2 upgrade [version] [version-number]`);
+njs3 project <project-name> [version] [version-number] 
+njs3 endpoint <endpoint-name>
+njs3 run serverless
+njs3 run express
+njs3 run nodemon
+njs3 run test
+njs3 plugin <plugin-name>
+njs3 plugin uninstall <plugin-name>
+njs3 plugin compile
+njs3 plugin install [<plugin-name>]
+njs3 library <folder-name> <filename> <options : [sql,mongo]>
+njs3 upgrade [version] [version-number]`);
     break;
 }
 
