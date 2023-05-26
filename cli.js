@@ -2,14 +2,6 @@
 const child_process = require("child_process");
 const { promisify } = require('util');
 const exec = promisify(child_process.exec);
-const ProgressBar = require("progress");
-const progressBarFormat = '  [:bar] :percent :etas';
-const progressBar = new ProgressBar(progressBarFormat, {
-  total: 100,
-  width: 30,
-});
-
-
 let CLI_KEYS = {};
 let CLI_ARGS = [];
 
@@ -44,8 +36,9 @@ switch (CMD) {
 
   case 'test':
     require('./helper/testGenerator.js').generateTest().then(async () => {
-      await exec(`npm i --save-dev supertest chai mocha `, { stdio: 'inherit' })
-      await exec(`./node_modules/.bin/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
+       exec(`npm i --save-dev supertest chai mocha `, { stdio: 'ignore' }).then(()=>{
+        child_process.exec(`./node_modules/.bin/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
+       })
     }).catch((e) => {
       console.log(e)
     })
