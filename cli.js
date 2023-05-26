@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { generateTest } = require('./helper/testGenerator.js')
+const child_process = require("child_process");
 
 let CLI_KEYS = {};
 let CLI_ARGS = [];
@@ -34,9 +34,12 @@ switch (CMD) {
     break;
 
   case 'test':
-    await generateTest();
-    child_process.execSync(`npm i --save-dev supertest chai `, { stdio: 'ignore' }).stdout.pipe();
-    child_process.exec(`${cliFilePath}/node_modules/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
+    require('./helper/testGenerator.js').generateTest().then(() => {
+      child_process.execSync(`npm i --save-dev supertest chai `, { stdio: 'ignore' }).stdout.pipe();
+      child_process.exec(`${cliFilePath}/node_modules/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
+    }).catch((e) => {
+      console.log(e)
+    })
     break;
 
   case "plugin":
