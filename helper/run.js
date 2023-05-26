@@ -1,7 +1,6 @@
 const child_process = require("child_process");
 const path = require('path');
 const fs = require('fs');
-const { generateTest } = require('./testGenerator');
 
 /**
  * @param {*} CLI_KEYS 
@@ -28,7 +27,6 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
 
   // Runs the lint proccess for syntax validations
   child_process.execSync('npm run lint', { stdio: 'inherit' });
-  const cliFilePath = `~/.nvm/versions/node/${process.version}/lib/node_modules/@juego/njs3-cli`;
 
   //  const testReporterInstance = new testReportFilePath();
   switch (CLI_ARGS[0]) {
@@ -39,12 +37,6 @@ const execute = async (CLI_KEYS, CLI_ARGS) => {
     case 'nodemon':
       child_process.exec('./node_modules/.bin/nodemon express.js').stdout.pipe(process.stdin);
       child_process.exec('./node_modules/.bin/nodemon socketio.js').stdout.pipe(process.stdin);
-      break;
-
-    case 'test':
-      await generateTest();
-      child_process.execSync(`npm i --save-dev supertest chai mocha `, { stdio:'ignore' });
-      child_process.exec(`mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
       break;
 
     case 'express':

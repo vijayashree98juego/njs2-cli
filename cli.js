@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+const { generateTest } = require('./helper/testGenerator.js')
+
 let CLI_KEYS = {};
 let CLI_ARGS = [];
 
@@ -14,6 +16,7 @@ for (let i = 0; i < process.argv.slice(2).length; i++) {
 
 const CMD = CLI_ARGS[0];
 CLI_ARGS = CLI_ARGS.slice(1);
+const cliFilePath = `~/.nvm/versions/node/${process.version}/lib/node_modules/@juego/njs3-cli`;
 
 switch (CMD) {
   case "project":
@@ -30,16 +33,22 @@ switch (CMD) {
     require("./helper/run").execute(CLI_KEYS, CLI_ARGS);
     break;
 
+  case 'test':
+    await generateTest();
+    child_process.execSync(`npm i --save-dev supertest chai `, { stdio: 'ignore' }).stdout.pipe();
+    child_process.exec(`${cliFilePath}/node_modules/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
+    break;
+
   case "plugin":
     // Plugin related actions will be handled here
     require("./helper/plugin-commands").execute(CLI_KEYS, CLI_ARGS);
     break;
-  
+
   // create library files
   case "library":
     require("./helper/create-library").execute(CLI_KEYS, CLI_ARGS);
     break;
-  
+
   case "upgrade":
     require("./helper/upgrade-project").execute(CLI_KEYS, CLI_ARGS);
     break;
@@ -76,7 +85,7 @@ switch (CMD) {
   // case "install":
   //   require("./helper/install-private-plugin").execute(CLI_KEYS, CLI_ARGS);
   //   break;
-  
+
   case "help":
     console.log(`
 njs2 project <project-name> [version] [version-number] 
