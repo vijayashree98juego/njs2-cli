@@ -1,6 +1,6 @@
 {
   "name": "@juego/njs3-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -23,6 +23,7 @@
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.0",
     "mocha": "^10.2.0",
+    "progress": "^2.0.3",
     "tar": "^6.1.0",
     "xml-js": "^1.6.11"
   },

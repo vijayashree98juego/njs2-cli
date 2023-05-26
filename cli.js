@@ -1,5 +1,14 @@
 #!/usr/bin/env node
 const child_process = require("child_process");
+const { promisify } = require('util');
+const exec = promisify(child_process.exec);
+const ProgressBar = require("progress");
+const progressBarFormat = '  [:bar] :percent :etas';
+const progressBar = new ProgressBar(progressBarFormat, {
+  total: 100,
+  width: 30,
+});
+
 
 let CLI_KEYS = {};
 let CLI_ARGS = [];
@@ -34,9 +43,28 @@ switch (CMD) {
     break;
 
   case 'test':
-    require('./helper/testGenerator.js').generateTest().then(() => {
-      child_process.execSync(`npm i --save-dev supertest chai mocha `, { stdio: 'ignore' });
-      child_process.exec(`./node_modules/.bin/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
+    require('./helper/testGenerator.js').generateTest().then(async () => {
+      await exec(`npm i --save-dev supertest chai mocha `, { stdio: 'ignore' }).stdout.on('data', (data) => {
+        const strData = data.toString();
+
+        // Extract the progress percentage from the npm output
+        const regex = /(\d+)%/g;
+        const matches = strData.match(regex);
+
+        if (matches) {
+          const progressPercentage = parseInt(matches[matches.length - 1]);
+
+          // Calculate the progress bar value based on the percentage
+          const progressValue = progressPercentage / 100;
+
+          // Update the progress bar
+          progressBar.update(progressValue);
+        }
+
+        // Output the npm install output
+        process.stdout.write(data);
+      });
+      await exec(`./node_modules/.bin/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
     }).catch((e) => {
       console.log(e)
     })
