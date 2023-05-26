@@ -35,8 +35,8 @@ switch (CMD) {
 
   case 'test':
     require('./helper/testGenerator.js').generateTest().then(() => {
-      child_process.execSync(`npm i --save-dev supertest chai `, { stdio: 'ignore' }).stdout.pipe();
-      child_process.exec(`${cliFilePath}/node_modules/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
+      child_process.execSync(`npm i --save-dev supertest chai mocha `, { stdio: 'ignore' }).stdout.pipe();
+      child_process.exec(`./node_modules/.bin/mocha \"./src/test/**/*.test.js\" --reporter ${cliFilePath}/helper/testReportGenerator.js`).stdout.pipe(process.stdin);
     }).catch((e) => {
       console.log(e)
     })
