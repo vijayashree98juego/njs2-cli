@@ -96,7 +96,7 @@ Please select a db type: (Use arrow keys)
 
 
 ## Plugin Commands
-Use this command to perform plugin related commands.
+Use this command to perform plugin related actions.
 ```
 oclif-cli plugin
 ```
@@ -117,6 +117,39 @@ Please select a plugin action: (Use arrow keys)
 ```uninstall``` -> This command uninstall plugin.
 
 ```compile``` -> This command prepares compiled folders of the plugin for multiple node versions and uploads only the compiled code of the Private Plugin created in the ”dist” directory to Juego Registry.
+
 Pre-requisites -> Node Version Manager installed locally.
                -> Need to be logged into Juego NPM Registry before uploading the Plugin.
 
+
+Developers reference
+====================
+
+Requisites -> node version 18
+           -> Typescript installed
+
+## How to create a command using oclif-cli?
+```
+oclif-cli generate COMMAND
+```
+e.g.:
+```
+oclif-cli generate create
+```
+
+This command wil generate 3 files in 3 different folders respectively.
+1. src->commands->create.ts
+  Flags, arguments, description, examples of the command can be defined here and command helper function is called.
+2. src->executors->create.ts
+  Here, functionality of the command can be defined.
+3. test->commands->create.test.ts
+  Here, test report of command is generated.
+  
+Once command creation is completed, you can run command:
+```
+oclif-cli COMMAND [required or optional arguments or flags]
+```
+e.g.:
+```
+oclif-cli create PERSON -f <value>
+```
