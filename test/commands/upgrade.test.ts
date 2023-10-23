@@ -1,0 +1,19 @@
+
+import {expect, test} from '@oclif/test'
+
+describe('upgrade', () => {
+  test
+  .stdout()
+  .command(['upgrade'])
+  .it('runs hello', ctx => {
+    expect(ctx.stdout).to.contain('hello world')
+  })
+
+  test
+  .stdout()
+  .command(['upgrade', '--name', 'jeff'])
+  .it('runs hello --name jeff', ctx => {
+    expect(ctx.stdout).to.contain('hello jeff')
+  })
+})
+  

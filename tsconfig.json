@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "Node16",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "composite": true,
+    "target": "es2022",
+    "moduleResolution": "node16",
+    "esModuleInterop": true,
+    // "allowImportingTsExtensions": true,
+    // "noEmit": true,
+    "allowJs": true,
+    // "baseUrl": "./",
+    // "paths": {
+    //   "#oclif-cli/*": ["./src/*"] // Define an alias for your source files
+    // },
+    "baseUrl": "./",
+    "paths": {
+      "@oclif-cli/*": ["src/*","dist/*"] // Define an alias for your source files
+    }
+  },
+  "include": ["./src/**/*"],
+  "ts-node": {
+    "esm": true
+  }
+}

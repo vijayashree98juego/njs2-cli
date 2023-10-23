@@ -1,110 +1,307 @@
-Njs2 CLI - A Command Line Interface for Njs2 Framework
-================================================
+oclif-hello-world
+=================
 
-The `@njs2/cli` is a utility cli for Njs2 framework that helps to initialise project, endpoint and run the project in Express or with Serverless.
+oclif example Hello World CLI
 
-## Installation
-Install the `@njs2/cli` globally using below command. 
-```
-npm i -g @njs2/cli
-```
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+[![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
+[![GitHub license](https://img.shields.io/github/license/oclif/hello-world)](https://github.com/oclif/hello-world/blob/main/LICENSE)
 
-## Getting started with CLI
-Once the project is installed, you can directly start working with CLI using `njs2` command.
+<!-- toc -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
+# Usage
+<!-- usage -->
+```sh-session
+$ npm install -g @juego/oclif-cli
+$ oclif-cli COMMAND
+running command...
+$ oclif-cli (--version)
+@juego/oclif-cli/0.0.23 linux-x64 node-v18.18.0
+$ oclif-cli --help [COMMAND]
+USAGE
+  $ oclif-cli COMMAND
+...
 ```
-njs2 --help
-```
+<!-- usagestop -->
+# Commands
+<!-- commands -->
+* [`oclif-cli help [COMMANDS]`](#oclif-cli-help-commands)
+* [`oclif-cli plugins`](#oclif-cli-plugins)
+* [`oclif-cli plugins:install PLUGIN...`](#oclif-cli-pluginsinstall-plugin)
+* [`oclif-cli plugins:inspect PLUGIN...`](#oclif-cli-pluginsinspect-plugin)
+* [`oclif-cli plugins:install PLUGIN...`](#oclif-cli-pluginsinstall-plugin-1)
+* [`oclif-cli plugins:link PLUGIN`](#oclif-cli-pluginslink-plugin)
+* [`oclif-cli plugins:uninstall PLUGIN...`](#oclif-cli-pluginsuninstall-plugin)
+* [`oclif-cli plugins:uninstall PLUGIN...`](#oclif-cli-pluginsuninstall-plugin-1)
+* [`oclif-cli plugins:uninstall PLUGIN...`](#oclif-cli-pluginsuninstall-plugin-2)
+* [`oclif-cli plugins update`](#oclif-cli-plugins-update)
 
-## Creating a new Project
-To create a new project, run `project` command with project name are argument. The command will generate the project structure and install the dependencies for the project.
-```
-njs2 project <project-name>
-```
-This will create the new project with the latest version of ```@njs2/base``` package!
+## `oclif-cli help [COMMANDS]`
 
-If you intend to pass a different version than latest, use the below option:
-```
-njs2 project <project-name> version <version string>
-```
-e.g.:
-```
-njs2 project cricket-backend version 2.1.0
-```
-
-## Upgrade an existing project
-To upgrade the existing project to use a different version of ```@njs2/base``` pacakge use the below command
-```
-njs2 upgrade
-```
-This will upgrade the current project to the latest version of ```@njs2/base``` package!
-
-If you intend to pass a different version than latest, use the below option:
-```
-njs2 upgrade version <version string>
-```
-e.g.:
-```
-njs2 upgrade version 2.1.0
-```
-
-## Creating an endpoint
-To create an endpoint go to project directory, then run `endpoint` command with endpoint name as argument. This command with generate the structure for the endpoint.
-```
-njs2 endpoint user/details
-```
-
-## Run the project
-To run the project in express use `run` command. This will generate the postman definition and start the API and socket server and the postman definition is served at `'api_base_url'/postman` endpoint.
-```
-njs2 run express
-```
-
-OR
+Display help for oclif-cli.
 
 ```
-njs2 run
+USAGE
+  $ oclif-cli help [COMMANDS] [-n]
+
+ARGUMENTS
+  COMMANDS  Command to show help for.
+
+FLAGS
+  -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for oclif-cli.
 ```
 
-To run the project in serverless use `run` command with serverless as the argument. This will generate the postman definition and start the API and socket server and the postman definition is served at `'api_base_url'/postman` endpoint.
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/src/commands/help.ts)_
+
+## `oclif-cli plugins`
+
+List installed plugins.
+
 ```
-njs2 run serverless
+USAGE
+  $ oclif-cli plugins [--json] [--core]
+
+FLAGS
+  --core  Show core plugins.
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  List installed plugins.
+
+EXAMPLES
+  $ oclif-cli plugins
 ```
 
-To run the project with nodemon use `run` command with nodemon as the argument. This will generate the postman definition and start the API and socket server and the postman definition is served at `'api_base_url'/postman` endpoint.
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.3/src/commands/plugins/index.ts)_
+
+## `oclif-cli plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
 ```
-njs2 run nodemon
+USAGE
+  $ oclif-cli plugins:install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+
+ALIASES
+  $ oclif-cli plugins add
+
+EXAMPLES
+  $ oclif-cli plugins:install myplugin 
+
+  $ oclif-cli plugins:install https://github.com/someuser/someplugin
+
+  $ oclif-cli plugins:install someuser/someplugin
 ```
 
-## Install Private Njs2 packages
-To install custom Njs2 packages use `package` command with package name as argument. This will install the package in the project.
+## `oclif-cli plugins:inspect PLUGIN...`
+
+Displays installation properties of a plugin.
+
 ```
-njs2 package <package-name>
+USAGE
+  $ oclif-cli plugins:inspect PLUGIN...
+
+ARGUMENTS
+  PLUGIN  [default: .] Plugin to inspect.
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Displays installation properties of a plugin.
+
+EXAMPLES
+  $ oclif-cli plugins:inspect myplugin
 ```
 
-## Install Local Private Njs2 packages
-Use this command to install private Njs2 packages that is yet to be published to private store.
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.3/src/commands/plugins/inspect.ts)_
 
-This command needs you to pass 2 parameters
-1. ```package-name```
-2. the ```path of the source code``` of this package
+## `oclif-cli plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
 ```
-njs2 package-local <package-name> <package-local-project-path>
+USAGE
+  $ oclif-cli plugins:install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+
+ALIASES
+  $ oclif-cli plugins add
+
+EXAMPLES
+  $ oclif-cli plugins:install myplugin 
+
+  $ oclif-cli plugins:install https://github.com/someuser/someplugin
+
+  $ oclif-cli plugins:install someuser/someplugin
 ```
 
-## Uninstall Private Njs2 packages
-To uninstall custom Njs2 packages use `rm-package` command with package name as argument. This will uninstall the package from the project.
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.3/src/commands/plugins/install.ts)_
+
+## `oclif-cli plugins:link PLUGIN`
+
+Links a plugin into the CLI for development.
+
 ```
-njs2 rm-package <package-name>
+USAGE
+  $ oclif-cli plugins:link PLUGIN
+
+ARGUMENTS
+  PATH  [default: .] path to plugin
+
+FLAGS
+  -h, --help      Show CLI help.
+  -v, --verbose
+  --[no-]install  Install dependencies after linking the plugin.
+
+DESCRIPTION
+  Links a plugin into the CLI for development.
+  Installation of a linked plugin will override a user-installed or core plugin.
+
+  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
+  command will override the user-installed or core plugin implementation. This is useful for development work.
+
+
+EXAMPLES
+  $ oclif-cli plugins:link myplugin
 ```
 
-## Compile the Private Njs2 packages
-To compile the Njs2 custom packages use `compile` command. This will compile the package in package directory. This command also provides the option sync the package to remote S3 bucket.
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.3/src/commands/plugins/link.ts)_
+
+## `oclif-cli plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
 ```
-njs2 compile
+USAGE
+  $ oclif-cli plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ oclif-cli plugins unlink
+  $ oclif-cli plugins remove
 ```
 
-## Create a new Private package
-To create a package use `create-package` command with package name as argument. This will generate the package structure.
+## `oclif-cli plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
 ```
-njs2 create-package <package-name>
+USAGE
+  $ oclif-cli plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ oclif-cli plugins unlink
+  $ oclif-cli plugins remove
 ```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.3/src/commands/plugins/uninstall.ts)_
+
+## `oclif-cli plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ oclif-cli plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ oclif-cli plugins unlink
+  $ oclif-cli plugins remove
+```
+
+## `oclif-cli plugins update`
+
+Update installed plugins.
+
+```
+USAGE
+  $ oclif-cli plugins update [-h] [-v]
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Update installed plugins.
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.3/src/commands/plugins/update.ts)_
+<!-- commandsstop -->

@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "@oclif-cli/*": ["src/*","dist/*"] // Define an alias for your source files
+    }
+  },
+  "references": [
+    {"path": ".."}
+  ]
+}
