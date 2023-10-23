@@ -43,7 +43,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       const author = await ux.prompt("Author", { required: false });
       let packageJson: { [key: string]: string | object } = {};
       packageJson["njs2-type"] = "project";
-      packageJson["name"] = packageName;
+      packageJson["name"] = packageName ? packageName : PROJECT_NAME;
       packageJson["version"] = packageVersion;
       packageJson["description"] = description;
       packageJson["author"] = author;

@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { ExecaReturnValue, execa } from 'execa'
 import chalk from 'chalk'
-
+import  updatePostman  from '@oclif-cli/cliHelper/update-postman.js'
 
 // import data from '../utils/index.js'
 
@@ -41,7 +41,11 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       // Runs the lint proccess for syntax validations
       // await execa("npm", ["run", "lint"], {
       //   cwd: `${path.resolve(process.cwd())}`,
-      // });;
+      // });
+
+      // Creates postman.json that can be imported in postman
+      const postmanInstance = new updatePostman();
+      await postmanInstance.postmanCollectionHelper();
 
       switch (serverType) {
         case 'serverless':
