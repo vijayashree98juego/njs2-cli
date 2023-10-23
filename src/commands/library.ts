@@ -18,7 +18,7 @@ export default class library extends BaseCommand<typeof library> {
     const serverType = await inquirer.prompt({
       type: "list",
       name: "selectedOption",
-      message: "Please select a server type:",
+      message: "Please select a db type:",
       choices: options,
     });
     this.execute(args.folderName, args.fileName, serverType.selectedOption);//to call command helper function

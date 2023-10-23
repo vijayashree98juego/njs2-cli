@@ -8,12 +8,13 @@ export default class upgrade extends BaseCommand<typeof upgrade> {
     static examples = ["<%= config.bin %> <%= command.id %>"];
   
       static flags = {
+        version: Flags.string(),
         // flag with a value (-n, --name=VALUE)
-        version: Flags.version({
-          char: "v",
-          description: "njs2 base version ",
-          required: false,
-        }),
+        // version: Flags.version({
+        //   char: "v",
+        //   description: "njs2 base version ",
+        //   required: false,
+        // }),
       };
   
     public async run(): Promise<void> {

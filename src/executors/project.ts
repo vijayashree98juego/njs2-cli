@@ -44,7 +44,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       let packageJson: { [key: string]: string | object } = {};
       packageJson["njs2-type"] = "project";
       packageJson["name"] = packageName ? packageName : PROJECT_NAME;
-      packageJson["version"] = packageVersion;
+      packageJson["version"] = packageVersion ? packageVersion : "0.0.0";
       packageJson["description"] = description;
       packageJson["author"] = author;
       packageJson["dependencies"] = {
