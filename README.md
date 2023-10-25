@@ -108,9 +108,11 @@ The available actions for plugin commands are listed below:
 Description:
 
 ```create``` -> This command requires plugin name and creates the project structure for developing a new Njs2 Private Plugin.
+
 ![Screenshot from 2023-10-25 16-04-56](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/2adb7d41-55f5-40c3-8ac7-0c5019849a5f)
 
 ```install``` -> This command takes plugin name if provided or install all private plugins by reading the package.json file.
+
 ![Screenshot from 2023-10-25 16-06-15](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/ff116c1f-814c-443e-8f7d-03db6369ca8e)
 
 ```uninstall``` -> This command uninstall plugin.
