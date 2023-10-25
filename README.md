@@ -122,9 +122,11 @@ Pre-requisites -> Node Version Manager installed locally.
 
 ![Screenshot from 2023-10-25 16-07-05](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/28fb216f-d8c5-48ba-a3f3-6cbc7a6181e4)
 
+If NVM is not installed locally,then process will terminate
+
 ![Screenshot from 2023-10-25 16-07-20](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/98e0dbcd-a074-475f-9f5b-3731cfab5900)
 
-![Screenshot from 2023-10-25 16-09-23](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/3526a468-6615-4e68-9e94-36a2e4f0d1df)
+Once the compilation is sucess, cli will prompt for publishing the plugin Juego Registry as mentioned below
 
 ![Screenshot from 2023-10-25 16-11-31](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/e1b853ed-ca8d-4c82-9e23-821991f948dc)           
                
