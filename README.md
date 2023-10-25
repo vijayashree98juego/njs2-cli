@@ -150,22 +150,24 @@ oclif-cli generate COMMAND
 ```
 e.g.:
 ```
-oclif-cli generate create
+oclif-cli generate njs2-auth
 ```
 
 This command wil generate 3 files in 3 different folders respectively.
-1. src->commands->create.ts
-  Flags, arguments, description, examples of the command can be defined here and command helper function is called.
-2. src->executors->create.ts
-  Here, functionality of the command can be defined.
-3. test->commands->create.test.ts
+1. src-> commands-> njs2-auth.ts
+   Flags, arguments, description, examples of the command can be defined here and command helper function is called.
+3. src->executors-> njs2-auth.ts
+   Here, functionality of the command can be defined.
+4. test->commands->njs2-auth.test.ts
   Here, test report of command is generated.
   
 Once command creation is completed, you can run command:
+
+USAGE:
 ```
 oclif-cli COMMAND [required or optional arguments or flags]
 ```
 e.g.:
 ```
-oclif-cli create PERSON -f <value>
+oclif-cli njs2-auth email -f <value>
 ```
