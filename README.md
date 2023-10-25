@@ -4,20 +4,21 @@ Oclif CLI - A Command Line Interface for Njs2 Framework
 The `@juego/oclif-cli` is a utility cli for Njs2 framework that helps to initialise project, endpoint, library, upgrade Njs2 base, perform plugin actions and run the project in Express, nodemon or with Serverless.
 
 ## Installation
-Install the `@juego/oclif-cli` globally using below command. 
+Install the cli `@juego/oclif-cli` globally using below command. 
 ```
-npm i @juego/oclif-cli --registry=http://plugins.juegogames.com/
+npm i -g @juego/oclif-cli --registry= http://plugins.juegogames.com/
 ```
 
 ## Getting started with CLI
-Once the project is installed, you can directly start working with CLI using `oclif-cli
+Once the cli is installed, you can directly start working with CLI using `oclif-cli
 ` command.
 ```
 oclif-cli --help
 ```
 
 ## Creating a new Project
-To create a new project, run `project` command with project name as an argument. The command will generate the project structure and install the dependencies for the project.
+To create a new project, run `project` command with project name as an argument. 
+Once project template is ready , cli will prompt for installing the depencencies.If user confirms then it will install  the dependencies else it will terminate the process.
 ```
 oclif-cli project PROJECTNAME 
 ```
@@ -32,7 +33,7 @@ e.g.:
 oclif-cli project cricket-backend --version=2.1.0
 ```
 
-Users can input the package name, version, description, and author information for the project.
+Users can input the  version, description, and author information for the project.
 
 ## Upgrade an existing project
 To upgrade the existing project to use a latest version of ```@njs2/base``` pacakge use the below command
