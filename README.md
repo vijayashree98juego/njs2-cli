@@ -86,11 +86,12 @@ oclif-cli library FOLDERNAME FILENAME
 e.g.:
 ```
 oclif-cli library sqlLib user 
-OR
-oclif-cli library mongoLib user 
 ```
+Cli will prompt for db type as mentioned below 
 
-The available options for database type are listed below:
+![Screenshot from 2023-10-25 16-31-04](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/2fecdc3f-e1b4-4f2a-98db-82bfd75ebf74)
+
+After selecting the db type, cli will create respective lib file in below mentioned path
 
 ![Screenshot from 2023-10-25 16-00-54](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/4091dc54-a262-4716-9b0a-3f4e83e68b5e)
 
@@ -104,10 +105,13 @@ The available actions for plugin commands are listed below:
 
 ![Screenshot from 2023-10-25 16-05-26](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/e78edc6b-dc97-4036-a048-1ae6df91ce49)
 
+Description:
 
 ```create``` -> This command requires plugin name and creates the project structure for developing a new Njs2 Private Plugin.
+![Screenshot from 2023-10-25 16-04-56](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/2adb7d41-55f5-40c3-8ac7-0c5019849a5f)
 
 ```install``` -> This command takes plugin name if provided or install all private plugins by reading the package.json file.
+![Screenshot from 2023-10-25 16-06-15](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/ff116c1f-814c-443e-8f7d-03db6369ca8e)
 
 ```uninstall``` -> This command uninstall plugin.
 
@@ -115,9 +119,6 @@ The available actions for plugin commands are listed below:
 
 Pre-requisites -> Node Version Manager installed locally.
                -> Need to be logged into Juego NPM Registry before uploading the Plugin.
-![Screenshot from 2023-10-25 16-04-56](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/2adb7d41-55f5-40c3-8ac7-0c5019849a5f)
-
-![Screenshot from 2023-10-25 16-06-15](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/ff116c1f-814c-443e-8f7d-03db6369ca8e)
 
 ![Screenshot from 2023-10-25 16-07-05](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/28fb216f-d8c5-48ba-a3f3-6cbc7a6181e4)
 
@@ -125,7 +126,12 @@ Pre-requisites -> Node Version Manager installed locally.
 
 ![Screenshot from 2023-10-25 16-09-23](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/3526a468-6615-4e68-9e94-36a2e4f0d1df)
 
-![Screenshot from 2023-10-25 16-11-31](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/e1b853ed-ca8d-4c82-9e23-821991f948dc)
+![Screenshot from 2023-10-25 16-11-31](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/e1b853ed-ca8d-4c82-9e23-821991f948dc)           
+               
+
+
+
+
 
 
 Developers reference
