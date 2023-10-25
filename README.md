@@ -35,6 +35,8 @@ oclif-cli project cricket-backend --version=2.1.0
 
 Users can input the  version, description, and author information for the project.
 
+![Screenshot from 2023-10-25 16-01-46](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/431b6c0d-e010-4285-b31b-1990e2ef4d65)
+
 ## Upgrade an existing project
 To upgrade the existing project to use a latest version of ```@njs2/base``` pacakge use the below command
 ```
@@ -50,6 +52,8 @@ e.g.:
 ```
 oclif-cli upgrade --version=2.1.0
 ```
+![Screenshot from 2023-10-25 16-13-45](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/f3230549-ff1b-4794-b293-80eeef23bfc5)
+
 
 ## Creating an endpoint
 To create an endpoint go to project directory, then run `endpoint` command with endpoint name as an argument. This command will generate the structure for the endpoint.
@@ -60,6 +64,7 @@ e.g.:
 ```
 oclif-cli endpoint user/detail
 ```
+![Screenshot from 2023-10-25 15-54-16](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/2582d52c-78ed-4fef-8105-ff62f31eb47f)
 
 ## Run the project
 To run the project, use `run` command. 
@@ -68,12 +73,9 @@ oclif-cli run
 ```
 
 The available options to run the project are listed below:
-```
-Please select a server type: (Use arrow keys)
-❯ express 
-  nodemon 
-  serverless  
-```
+
+![Screenshot from 2023-10-25 16-12-25](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/92c432ef-384e-4da6-bca3-7e240427b367)
+
  This will generate the postman definition and start the API and socket server and the postman definition is served at `'api_base_url'/postman` endpoint.
 
 ## Creating a library
@@ -89,12 +91,8 @@ oclif-cli library mongoLib user
 ```
 
 The available options for database type are listed below:
-```
-Please select a db type: (Use arrow keys)
-❯ sql 
-  mongo
-```
 
+![Screenshot from 2023-10-25 16-00-54](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/4091dc54-a262-4716-9b0a-3f4e83e68b5e)
 
 ## Plugin Commands
 Use this command to perform plugin related actions.
@@ -103,13 +101,9 @@ oclif-cli plugin
 ```
 
 The available actions for plugin commands are listed below:
-```
-Please select a plugin action: (Use arrow keys)
-❯ create 
-  install 
-  uninstall 
-  compile 
-```
+
+![Screenshot from 2023-10-25 16-05-26](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/e78edc6b-dc97-4036-a048-1ae6df91ce49)
+
 
 ```create``` -> This command requires plugin name and creates the project structure for developing a new Njs2 Private Plugin.
 
@@ -121,6 +115,17 @@ Please select a plugin action: (Use arrow keys)
 
 Pre-requisites -> Node Version Manager installed locally.
                -> Need to be logged into Juego NPM Registry before uploading the Plugin.
+![Screenshot from 2023-10-25 16-04-56](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/2adb7d41-55f5-40c3-8ac7-0c5019849a5f)
+
+![Screenshot from 2023-10-25 16-06-15](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/ff116c1f-814c-443e-8f7d-03db6369ca8e)
+
+![Screenshot from 2023-10-25 16-07-05](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/28fb216f-d8c5-48ba-a3f3-6cbc7a6181e4)
+
+![Screenshot from 2023-10-25 16-07-20](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/98e0dbcd-a074-475f-9f5b-3731cfab5900)
+
+![Screenshot from 2023-10-25 16-09-23](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/3526a468-6615-4e68-9e94-36a2e4f0d1df)
+
+![Screenshot from 2023-10-25 16-11-31](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/e1b853ed-ca8d-4c82-9e23-821991f948dc)
 
 
 Developers reference
