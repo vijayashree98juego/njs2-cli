@@ -153,13 +153,15 @@ e.g.:
 oclif-cli generate njs2-auth
 ```
 
+Here COMMAND will be the name of the command user wants to create.
+
 This command wil generate 3 files in 3 different folders respectively.
 1. src-> commands-> njs2-auth.ts
    Flags, arguments, description, examples of the command can be defined here and command helper function is called.
 3. src->executors-> njs2-auth.ts
    Here, functionality of the command can be defined.
 4. test->commands->njs2-auth.test.ts
-  Here, test report of command is generated.
+  Here, test file of command is generated.
   
 Once command creation is completed, you can run command:
 
