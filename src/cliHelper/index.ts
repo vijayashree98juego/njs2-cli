@@ -1,11 +1,7 @@
-import { Function } from '@oclif-cli/interface/index.js';
-
-const commandTemplate: Function<string> = (commandName: string) => {
+const commandTemplate = (commandName: string) => {
   return `
     import {Args, Flags} from '@oclif/core'
-    import { BaseCommand } from "@oclif-cli/executors/${commandName}.js";
-
-    type argProps =  {[key:string]:string};
+    import { BaseCommand } from "../executors/${commandName}.js";
 
     export default class ${commandName} extends BaseCommand<typeof ${commandName}> {
         static description = "Creating a ${commandName}";
@@ -27,7 +23,7 @@ const commandTemplate: Function<string> = (commandName: string) => {
       }`;
 };
 
-const executeTemplate: Function<string> = () => {
+const executeTemplate = () => {
   return `
    import { Command } from "@oclif/core";
 
@@ -38,7 +34,7 @@ const executeTemplate: Function<string> = () => {
       `;
 };
 
-const testCaseTemplate: Function<string> = (commandName: string) => {
+const testCaseTemplate = (commandName: string) => {
   return `
 import {expect, test} from '@oclif/test'
 

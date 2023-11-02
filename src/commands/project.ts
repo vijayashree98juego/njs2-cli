@@ -3,9 +3,9 @@ import { BaseCommand } from "@oclif-cli/executors/project.js";
 import { Args, Flags } from "@oclif/core";
 
 export default class project extends BaseCommand<typeof project> {
-  static description: string = "Creating a project";
+  static description = "Creating a project";
 
-  static examples: string[] = ["oclif-cli project cricket-backend --version=2.1.0"];
+  static examples = ["<%= config.bin %> <%= command.id %>"];
 
   static flags = {
     version: Flags.string(),

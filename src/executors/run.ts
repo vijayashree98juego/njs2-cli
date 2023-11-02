@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { ExecaReturnValue, execa } from 'execa'
 import chalk from 'chalk'
-import updatePostman from '@oclif-cli/cliHelper/update-postman.js'
+import  updatePostman  from '@oclif-cli/cliHelper/update-postman.js'
 
 // import data from '../utils/index.js'
 
@@ -18,7 +18,7 @@ import updatePostman from '@oclif-cli/cliHelper/update-postman.js'
  */
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
-  async execute(serverType: string): Promise<void> {
+  async execute(serverType: string) {
     try {
       if (!fs.existsSync(`${path.resolve(process.cwd(), `package.json`)}`)) {
         //throw new Error(chalk.red('Run from project root direcory: njs2 run'))

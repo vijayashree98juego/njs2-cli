@@ -7,7 +7,7 @@ import { handler as createPluginHandler } from '@oclif-cli/cliHelper/create-plug
 import chalk from "chalk";
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
-  async execute(pluginName: string, pluginAction: string): Promise<void> {
+  async execute(pluginName: string, pluginAction: string) {
     try {
       switch (pluginAction) {
         case "compile":

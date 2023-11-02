@@ -1,16 +1,15 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import ora, { Ora } from "ora";
+import ora from "ora";
 import { execaCommandSync } from 'execa';
 
 import chalk from 'chalk';
 import { updateNodeModulesStructure, updateSrcFiles } from './utils.js';
-import { ArrayProps, AsyncFunction } from '@oclif-cli/interface/index.js';
 
-const excludeFolders: ArrayProps<string> = ["node_modules", "package.json"];
+const excludeFolders: string[] = ["node_modules", "package.json"];
 
-export const handler: AsyncFunction<void> = async (pluginName: string) => {
-  const spinner: Ora = ora(`Installing plugin for node version ${process.versions.node} ... `);
+export const handler = async (pluginName: string) => {
+  const spinner = ora(`Installing plugin for node version ${process.versions.node} ... `);
   try {
 
     let PLUGIN_NAME: string = pluginName;
@@ -43,9 +42,9 @@ export const handler: AsyncFunction<void> = async (pluginName: string) => {
         !localFolder &&
         !fs.existsSync(path.resolve(`./node_modules/${PLUGIN_NAME}/${nodeVersion}`))
       ) {
-        let pluginFolders: ArrayProps<string> = await fs.promises.readdir(path.resolve(`./node_modules/${PLUGIN_NAME}`));
+        let pluginFolders: string[] = await fs.promises.readdir(path.resolve(`./node_modules/${PLUGIN_NAME}`));
 
-        let availableVersions: ArrayProps<string> = [];
+        let availableVersions: string[] = [];
         pluginFolders.map((folder: string) => {
           if (!excludeFolders.includes(folder)) {
             availableVersions.push(folder + ".x");
@@ -67,10 +66,10 @@ export const handler: AsyncFunction<void> = async (pluginName: string) => {
       await updateSrcFiles(PLUGIN_NAME);
       spinner.succeed(chalk.green(`Installation completed!!`));
     } else {
-      const spinner: Ora = ora(`Installing plugin for node version ${process.versions.node} ... `).start();
+      const spinner = ora(`Installing plugin for node version ${process.versions.node} ... `).start();
 
       // Update plugin structure in node_modules
-      let packageList: ArrayProps<string> = await fs.promises.readdir(path.resolve(`./node_modules/@juego/`));
+      let packageList: string[] = await fs.promises.readdir(path.resolve(`./node_modules/@juego/`));
       await Promise.all(
         packageList.map(async (PLUGIN_NAME: string) => {
           await updateNodeModulesStructure(`@juego/${PLUGIN_NAME}`);

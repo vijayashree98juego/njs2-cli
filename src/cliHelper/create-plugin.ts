@@ -1,13 +1,12 @@
 import chalk from 'chalk';
 import * as path from "path";
-import ora, { Ora } from "ora";
+import ora from "ora";
 import fs from 'fs'
 import { execa, execaCommandSync } from "execa";
-import { AsyncFunction } from '@oclif-cli/interface/index.js';
 
 
-export const handler: AsyncFunction<void> = async (pluginName: string) => {
-  const spinner: Ora = ora(`Creating a package ... `);
+export const handler = async (pluginName: string) => {
+  const spinner = ora(`Creating a package ... `);
   try {
     const PLUGIN_NAME: string = pluginName;
     // Validations
