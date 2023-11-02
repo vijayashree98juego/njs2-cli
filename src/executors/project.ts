@@ -4,14 +4,14 @@ import * as fs from "fs";
 import * as path from "path";
 import { execa, execaCommandSync } from "execa";
 import chalk from "chalk";
-import ora from "ora";
+import ora, { Ora } from "ora";
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
-  async execute(projectName: string, version: string | undefined | void) {
-    const spinner = ora(`Creating a project template... `);
+  async execute(projectName: string, version: string | undefined | void): Promise<void> {
+    const spinner: Ora = ora(`Creating a project template... `);
     try {
-      const PROJECT_NAME = projectName;
-      let BASE_VERSION = "latest";
+      const PROJECT_NAME: string = projectName;
+      let BASE_VERSION: string = "latest";
 
       if (!PROJECT_NAME) {
         console.log("Project name is mandatory parameter");
@@ -39,12 +39,12 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
         // default: version ?? "1.0.0",
         required: false,
       });
-      const description = await ux.prompt("Description", { required: false });
-      const author = await ux.prompt("Author", { required: false });
+      const description: string = await ux.prompt("Description", { required: false });
+      const author: string = await ux.prompt("Author", { required: false });
       let packageJson: { [key: string]: string | object } = {};
       packageJson["njs2-type"] = "project";
       packageJson["name"] = packageName ? packageName : PROJECT_NAME;
-      packageJson["version"] = packageVersion ? packageVersion : "0.0.0";
+      packageJson["version"] = packageVersion ? packageVersion : "^0.0.1";
       packageJson["description"] = description;
       packageJson["author"] = author;
       packageJson["dependencies"] = {
@@ -60,7 +60,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
 
       console.log(chalk.white((JSON.stringify(JSON.parse(JSON.stringify(packageJson)), null, 2))));
 
-      const response = await ux.confirm("Is this ok ? y/n");
+      const response: boolean = await ux.confirm("Is this ok ? y/n");
 
       if (response) {
         await execa(`mkdir`, [`${PROJECT_NAME}`]);
@@ -103,8 +103,8 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
           )
         );
         packageJsonExist["njs2-type"] = "project";
-        packageJsonExist["name"] = packageName;
-        packageJsonExist["version"] = packageVersion;
+        packageJsonExist["name"] = packageName ? packageName : PROJECT_NAME;
+        packageJsonExist["version"] = packageVersion ? packageVersion : "^0.0.1";
         packageJsonExist["description"] = description;
         packageJsonExist["author"] = author;
         packageJsonExist["dependencies"] = packageJson["dependencies"];

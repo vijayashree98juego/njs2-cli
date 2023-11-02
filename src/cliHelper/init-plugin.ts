@@ -2,16 +2,16 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { execa } from 'execa'
 import chalk from 'chalk'
-import { JSONObject } from '../interface/index.js'
+import { ArrayProps, AsyncFunction, ObjectProps } from '../interface/index.js'
 
 
-export const initPackage = async (LIBRARY_NAME: string) => {
-  const PACKAGE: JSONObject = JSON.parse(
+export const initPackage: AsyncFunction<void> = async (LIBRARY_NAME: string) => {
+  const PACKAGE: ObjectProps<any> = JSON.parse(
     fs.readFileSync(`${path.resolve(`./node_modules/${LIBRARY_NAME}/package.json`)}`, 'utf-8'),
   )
 
   try {
-    const PLUGINS = PACKAGE['njs2-endpoints']
+    const PLUGINS: ArrayProps<string> = PACKAGE['njs2-endpoints']
     await Promise.all(PLUGINS.map(async (plugin: string) => {
       const METHOD_NAME: string = `${PACKAGE['njs2-method-prefix']}.${plugin}`
       const METHODS_PATH: string = `src/methods/${METHOD_NAME}`

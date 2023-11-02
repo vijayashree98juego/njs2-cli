@@ -1,23 +1,21 @@
 import * as fs from "fs";
 import * as path from "path";
-import ora from "ora";
+import ora, { Ora } from "ora";
 import { execaCommandSync } from "execa";
 import chalk from "chalk";
-import { JSONObject } from "../interface/index.js";
+import { ArrayProps, AsyncFunction, PackageJonProps } from "@oclif-cli/interface/index.js";
 
-
-
-export const handler = async (pluginName: string) => {
-  const spinner = ora(`Uninstalling plugin for node version ${process.versions.node} ... `);
+export const handler: AsyncFunction<void> = async (pluginName: string) => {
+  const spinner: Ora = ora(`Uninstalling plugin for node version ${process.versions.node} ... `);
   try {
     if (!fs.existsSync(`${path.resolve(`./package.json`)}`)) {
       //throw new Error(chalk.red('Run from project root direcory: njs2 plugin uninstall <plugin-name> (Eg: njs2-auth-email)'));
       console.log(chalk.red('Run from project root direcory: njs2 plugin uninstall <plugin-name> (Eg: njs2-auth-email)'));
       process.exit(1);
     }
-      
 
-    const packageJson: JSONObject = JSON.parse(fs.readFileSync(`${path.resolve(`./package.json`)}`, 'utf-8'));
+
+    const packageJson: PackageJonProps = JSON.parse(fs.readFileSync(`${path.resolve(`./package.json`)}`, 'utf-8'));
     if (packageJson['njs2-type'] != 'project') {
       //throw new Error(chalk.red('Run from project root directory: njs2 plugin uninstall <plugin-name> (Eg: njs2 plugin uninstall njs2-auth-email)'));
       console.log(chalk.red('Run from project root directory: njs2 plugin uninstall <plugin-name> (Eg: njs2 plugin uninstall njs2-auth-email)'));
@@ -37,7 +35,7 @@ export const handler = async (pluginName: string) => {
       PLUGIN_NAME = "@juego/" + PLUGIN_NAME.split('/').pop();
     }
 
-    const packageExists: string[] = Object.keys(packageJson.dependencies).filter(packageName => packageName == PLUGIN_NAME);
+    const packageExists: ArrayProps<string> = Object.keys(packageJson.dependencies).filter(packageName => packageName == PLUGIN_NAME);
     if (packageExists.length == 0) {
       //throw new Error(chalk.red("Plugin Dose not exists!"));
       console.log(chalk.red("Plugin Dose not exists!"));
