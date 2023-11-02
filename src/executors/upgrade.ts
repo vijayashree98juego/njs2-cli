@@ -2,14 +2,15 @@
 import { Command } from "@oclif/core";
 import * as fs from "fs";
 import * as path from "path";
-import ora from "ora";
+import ora, { Ora } from "ora";
 import { execa } from "execa";
 import chalk from "chalk";
+import { PackageJonProps } from "@oclif-cli/interface/index.js";
 
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
-  async execute(version: string | undefined | void) {
-    const spinner = ora(`Upgrading njs2 base ... `);
+  async execute(version: string | undefined | void): Promise<void> {
+    const spinner: Ora = ora(`Upgrading njs2 base ... `);
 
     try {
       if (!fs.existsSync(`${path.resolve(process.cwd(), `package.json`)}`)) {
@@ -18,7 +19,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
         process.exit(1);
       }
 
-      const package_json = JSON.parse(
+      const package_json: PackageJonProps = JSON.parse(
         fs.readFileSync(`${path.resolve(process.cwd(), `package.json`)}`, 'utf-8'));
       if (package_json['njs2-type'] != 'project') {
         //throw new Error(chalk.red('njs2 upgrade should be ran from project root directory'));
@@ -26,7 +27,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
         process.exit(1);
       }
 
-      let REQUESTED_BASE_VERSION = "latest"
+      let REQUESTED_BASE_VERSION: string = "latest"
       if (version) {
         REQUESTED_BASE_VERSION = version;
       }

@@ -1,9 +1,10 @@
 
 import * as fs from "fs";
 import * as path from "path";
-import { JSONObject } from "../interface/index.js";
+import { AsyncFunction, ObjectProps } from "@oclif-cli/interface/index.js";
 
-export const initEnv = async (LIBRARY_NAME: string) => {
+
+export const initEnv: AsyncFunction<void> = async (LIBRARY_NAME: string) => {
   try {
     let envFileContents: string = fs.readFileSync(
       path.resolve(`./node_modules/${LIBRARY_NAME}/env.json`),
@@ -13,8 +14,8 @@ export const initEnv = async (LIBRARY_NAME: string) => {
       path.resolve(`./src/config/config.json`),
       "utf8"
     );
-    let envFileContentsObject: JSONObject = JSON.parse(envFileContents);
-    let projectEnvFileContentsObject: JSONObject = JSON.parse(projectEnvFileContents);
+    let envFileContentsObject: ObjectProps<string> = JSON.parse(envFileContents);
+    let projectEnvFileContentsObject: ObjectProps<any> = JSON.parse(projectEnvFileContents);
 
     if (Array.isArray(envFileContentsObject)) {
       // If public plugin then read other then organisation name key
@@ -22,12 +23,12 @@ export const initEnv = async (LIBRARY_NAME: string) => {
         LIBRARY_NAME.split("/").length == 1
           ? LIBRARY_NAME.toUpperCase()
           : LIBRARY_NAME.split("/")[1].toUpperCase();
-          envFileContentsObject.forEach((envDetail: JSONObject) => {
+      envFileContentsObject.forEach((envDetail: ObjectProps<any>) => {
         if (envDetail.parent == "") {
           if (projectEnvFileContentsObject[configKey]) {
             Object.keys(envDetail).map((key: string | number) => {
               if (!projectEnvFileContentsObject[configKey][key] && key != "parent")
-              projectEnvFileContentsObject[configKey][key] = envDetail[key];
+                projectEnvFileContentsObject[configKey][key] = envDetail[key];
             });
           } else {
             delete envDetail.parent;
@@ -64,7 +65,7 @@ export const initEnv = async (LIBRARY_NAME: string) => {
       if (projectEnvFileContentsObject[configKey]) {
         Object.keys(envFileContentsObject).map((key: string | number) => {
           if (!projectEnvFileContentsObject[configKey][key])
-          projectEnvFileContentsObject[configKey][key] = envFileContentsObject[key];
+            projectEnvFileContentsObject[configKey][key] = envFileContentsObject[key];
         });
       } else {
         projectEnvFileContentsObject[configKey] = envFileContentsObject;

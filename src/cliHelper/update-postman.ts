@@ -2,42 +2,43 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { ExecaReturnValue, execa } from 'execa'
 import { createRequire } from "module";
-import ora from 'ora';
+import ora, { Ora } from 'ora';
 import chalk from 'chalk';
+import { ArrayProps, ObjectProps, PackageJonProps, apiDefinationProps, apiResProps, directProps, } from '@oclif-cli/interface/index.js';
 const require = createRequire(import.meta.url);
 global.baseInitialize = require(`${path.resolve(process.cwd(), `node_modules/@njs2/base/base/baseInitialize.class.js`)}`);
 
 
-export default class updatePostman  {
-   baseInitialize :any;
+export default class updatePostman {
+  baseInitialize: any;
 
   constructor() {
     this.baseInitialize = require(`${path.resolve(process.cwd(), `node_modules/@njs2/base/base/baseInitialize.class.js`)}`);
   }
 
   async postmanCollectionHelper() {
-    const spinner = ora(`Processing collection ... `).start();
+    const spinner: Ora = ora(`Processing collection ... `).start();
     try {
       const packageJsonContent: ExecaReturnValue<string> = await execa(
         "cat",
         [`${path.resolve(process.cwd(), `package.json`)}`]
       );
 
-    
-      const packageJson: any = JSON.parse(packageJsonContent.stdout);
-     
+
+      const packageJson: PackageJonProps = JSON.parse(packageJsonContent.stdout);
+
       const configContent: ExecaReturnValue<string> = await execa("cat", [
         `${path.resolve(process.cwd(), `src/config/config.json`)}`,
       ]);
 
-      const base_url = JSON.parse(configContent.stdout).API_ENDPOINT;
-      const apiPaths = fs
+      const base_url: ObjectProps<string> = JSON.parse(configContent.stdout).API_ENDPOINT;
+      const apiPaths: ArrayProps<string> = fs
         .readdirSync(path.resolve(process.cwd(), "src/methods"), {
           withFileTypes: true,
         })
-        .filter((dirent: any) => dirent.isDirectory())
-        .map((dirent: any) => dirent.name);
-      const apiRes: any = {
+        .filter((dirent: directProps) => dirent.isDirectory())
+        .map((dirent: directProps) => dirent.name);
+      const apiRes: apiResProps = {
         info: {
           _postman_id: packageJson.name,
           name: packageJson.name,
@@ -52,15 +53,15 @@ export default class updatePostman  {
       apiRes.item = await Promise.all(apiPaths.map(async (apiPath) => {
         let apiInit = require(path.resolve(process.cwd(), `src/methods/${apiPath}/init.js`));
         const apiInitObj = new apiInit();
-        const paramsList = apiInitObj.getParameter();
+        const paramsList: ObjectProps<any> = apiInitObj.getParameter();
         // console.log("paramlist")
         // console.log(paramsList)
-        let fileExists = false;
+        let fileExists: boolean = false;
         Object.keys(paramsList).map((key) => {
           if (paramsList[key].type == "file") fileExists = true;
         });
 
-        let apiDefination: any = {
+        let apiDefination: apiDefinationProps = {
           name: apiPath.split(".").join("/"),
           request: {
             method:
@@ -103,7 +104,7 @@ export default class updatePostman  {
             type: "text",
           });
         }
-        let paramsDef = Object.keys(paramsList).map((params) => {
+        let paramsDef: ObjectProps<any> = Object.keys(paramsList).map((params) => {
           return {
             key: paramsList[params].name,
             value: paramsList[params].default,
@@ -159,7 +160,7 @@ export default class updatePostman  {
       fs.writeFileSync("postman.json", JSON.stringify(apiRes, null, 2));
       spinner.succeed("Updated collection in postman.json file")
       return apiRes;
-    } catch (e: any) {
+    } catch (e) {
       // console.log('error ids there')
       // console.log(e.message)
       spinner.fail("Updating collection in postman.json file failed\n" + chalk.red((e as Error).message))

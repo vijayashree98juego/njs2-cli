@@ -1,24 +1,25 @@
 import * as path from 'path'
-import ora from 'ora'
+import ora, { Ora } from 'ora';
 import chalk from 'chalk'
 import { execa, execaCommandSync, execaCommand } from 'execa'
 import fs from 'fs-extra'
 import inquirer from 'inquirer'
-import { JSONObject } from '../interface/index.js'
+import { ArrayProps, AsyncFunction, PackageJonProps, userProps } from '@oclif-cli/interface/index.js'
+
 
 // const filePath = 'dist/compiled';
-let excludeFolders: string[] = ['tmp']
+let excludeFolders: ArrayProps<string> = ['tmp']
 let registryUrl: string = 'http://plugins.juegogames.com'
 
 let syncRemote: boolean = false
 let encryptStatus: boolean = true
 let versionManager: boolean | string = false
-let nodeVersions: string[] = ['12', '14', '16']
+let nodeVersions: ArrayProps<string> = ['12', '14', '16']
 
-const checkIfUserLoggedIn = async () => {
+const checkIfUserLoggedIn: AsyncFunction<void> = async () => {
   try {
     // Check if user logged into NPM
-    const user = await execaCommandSync(`npm whoami --registry=${registryUrl}`, { encoding: 'utf8', stdio: 'pipe' })
+    const user: userProps<string, number, boolean> = await execaCommandSync(`npm whoami --registry=${registryUrl}`, { encoding: 'utf8', stdio: 'pipe' })
     console.log(chalk.bold(`Logged in as: ${user}`))
   } catch (e) {
     throw `
@@ -30,15 +31,15 @@ const checkIfUserLoggedIn = async () => {
   }
 }
 
-const uploadFileToRegistry = async (filepath: string) => {
+const uploadFileToRegistry: AsyncFunction<void> = async (filepath: string) => {
   await execaCommandSync(`cp package.json ${filepath} & cd ${filepath} & npm publish --registry ${registryUrl}`, {
     stdio: 'ignore',
     shell: true,
   })
 }
 
-const getRegistryUploadStatus = async () => {
-  const cliRes: JSONObject = await inquirer.prompt([
+const getRegistryUploadStatus: AsyncFunction<void> = async () => {
+  const cliRes: { [key: string]: string } = await inquirer.prompt([
     {
       type: 'list',
       name: 'sync-remote',
@@ -49,8 +50,8 @@ const getRegistryUploadStatus = async () => {
   syncRemote = cliRes['sync-remote'] == 'Yes'
 }
 
-const getVersionManagerChoice = async () => {
-  const cliRes: JSONObject = await inquirer.prompt([
+const getVersionManagerChoice: AsyncFunction<void> = async () => {
+  const cliRes: { [key: string]: string } = await inquirer.prompt([
     {
       type: 'list',
       name: 'version-manager',
@@ -63,16 +64,16 @@ const getVersionManagerChoice = async () => {
 }
 
 /** * @description * njs2 compile * */
-export const handler = async () => {
-  let spinner = ora();
+export const handler: AsyncFunction<void> = async () => {
+  let spinner: Ora = ora();
   try {
 
-    const packageJson: JSONObject = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
-if (!packageJson || !packageJson['njs2-type']) {
-  //throw new Error(chalk.red('Run this comand from NJS2 base/endpoint/helper package directory...'))
-  console.log(chalk.red('Run this comand from NJS2 base/endpoint/helper package directory...'));
-  process.exit(1);
-}
+    const packageJson: PackageJonProps = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
+    if (!packageJson || !packageJson['njs2-type']) {
+      //throw new Error(chalk.red('Run this comand from NJS2 base/endpoint/helper package directory...'))
+      console.log(chalk.red('Run this comand from NJS2 base/endpoint/helper package directory...'));
+      process.exit(1);
+    }
     // spinner.stop()
 
     // get version manager
@@ -89,9 +90,9 @@ if (!packageJson || !packageJson['njs2-type']) {
       console.log(chalk.red('njs2 compile (Run from plugin directory) root directory'))
       process.exit(1);
     }
-      
 
-    let package_json: JSONObject = JSON.parse(
+
+    let package_json: PackageJonProps = JSON.parse(
       fs.readFileSync(`${path.resolve(process.cwd(), `package.json`)}`, 'utf-8'),
     )
 
@@ -132,7 +133,7 @@ if (!packageJson || !packageJson['njs2-type']) {
           // console.log( execaCommandSync(` rsync -r --exclude 'dist' * ./dist/${version}`));
 
           // await execa('rsync', ['-r', '--exclude', 'dist', process.cwd(), `./dist/${version}`]);
-          const command = `rsync -r --exclude dist ${process.cwd()}/ ./dist/${version}`
+          const command: string = `rsync -r --exclude dist ${process.cwd()}/ ./dist/${version}`
           execaCommandSync(command)
           //console.log(`Compiling for node version ${version}`.green);
 
@@ -167,7 +168,7 @@ if (!packageJson || !packageJson['njs2-type']) {
         await uploadFileToRegistry('dist')
         spinner.succeed(chalk.green('File uploading success'))
       } catch (e) {
-        spinner.fail(chalk.red('File uploading failed. Try again after some time.\n') +(e as Error).message)
+        spinner.fail(chalk.red('File uploading failed. Try again after some time.\n') + (e as Error).message)
       }
     } else {
       process.exit(1)

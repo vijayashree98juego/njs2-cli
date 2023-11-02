@@ -5,9 +5,9 @@ import * as fs from "fs";
 
 
 class Generate extends Command {
-  static description = "Generate new command";
+  static description: string = "Generate new command";
 
-  static examples = ["<%= config.bin %> <%= command.id %>"];
+  static examples: string[] = ["oclif-cli generate create"];
 
   static args = {
     command: Args.string({ description: "Command name", required: true }),

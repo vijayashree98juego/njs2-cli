@@ -3,12 +3,12 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as execa from 'execa'
 import chalk from 'chalk'
-import ora from 'ora'
-import { JSONObject } from '@oclif-cli/interface/index.js'
+import ora, { Ora } from 'ora'
+import { ArrayProps, PackageJonProps } from '@oclif-cli/interface/index.js'
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
-  async execute(argName: string) {
-    const spinner = ora(`Creating a endpoint... `);
+  async execute(argName: string): Promise<void> {
+    const spinner: Ora = ora(`Creating a endpoint... `);
     try {
       if (!fs.existsSync(`${path.resolve(process.cwd(), `package.json`)}`)) {
         //throw new Error(chalk.red('njs2 endpoint <endpoint-name> to be run from project root directory'))
@@ -16,7 +16,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
         process.exit(1);
       }
 
-      const package_json: JSONObject = JSON.parse(fs.readFileSync(`${path.resolve(process.cwd(), `package.json`)}`, { encoding: 'utf8', flag: 'r' }))
+      const package_json: PackageJonProps = JSON.parse(fs.readFileSync(`${path.resolve(process.cwd(), `package.json`)}`, { encoding: 'utf8', flag: 'r' }))
 
       if (package_json['njs2-type'] != 'project') {
         //throw new Error(chalk.red('njs2 endpoint <endpoint-name> to be run from project root directory'));
@@ -24,7 +24,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
         process.exit(1);
       }
 
-      let splitString: string[] = argName.split('/')
+      let splitString: ArrayProps<string> = argName.split('/')
       splitString = splitString.map((element, index) => {
         //Checking for index > 1 because if method name is "/user/detail" then second resource(detail) should
         //get converted to Pascal case "user" should be camel case
@@ -50,7 +50,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       )}/node_modules/@njs2/base/template/methodStructure/. ${path.resolve(process.cwd(), '.')}/${METHODS_PATH}`
 
       execa.execaCommandSync(COPY_TEMP_SCRIPT)
-      let executeFileContents = fs.readFileSync(path.resolve(process.cwd(), `${METHODS_PATH}/action.js`), 'utf8')
+      let executeFileContents: string = fs.readFileSync(path.resolve(process.cwd(), `${METHODS_PATH}/action.js`), 'utf8')
       executeFileContents = executeFileContents.replace(
         /<method-name>/g,
         METHOD_NAME.split(/(?:\.|-)+/)

@@ -4,11 +4,12 @@ import * as fs from "fs";
 import * as path from "path";
 import { execaCommandSync } from "execa";
 import chalk from "chalk";
-import ora from "ora";
+import ora, { Ora } from "ora";
+import { PackageJonProps } from "@oclif-cli/interface/index.js";
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
-  async execute(folderName: string, fileName: string, serverType: string | undefined | void) {
-    const spinner = ora(`Creating a library... `);
+  async execute(folderName: string, fileName: string, serverType: string | undefined | void): Promise<void> {
+    const spinner: Ora = ora(`Creating a library... `);
     try {
       if (!fs.existsSync(`${path.resolve(process.cwd(), `package.json`)}`)) {
         console.log(
@@ -19,7 +20,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
 
       }
 
-      const package_json = JSON.parse(fs.readFileSync(`${path.resolve(
+      const package_json: PackageJonProps = JSON.parse(fs.readFileSync(`${path.resolve(
         process.cwd(),
         `package.json`
       )}`, { encoding: 'utf8', flag: 'r' }));
@@ -33,14 +34,14 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
 
 
 
-      let COPY_TEMP_SCRIPT = "";
-      const LIB_NAME = folderName;
-      const LIB_PATH = `src/library/${LIB_NAME}`;
+      let COPY_TEMP_SCRIPT: string = "";
+      const LIB_NAME: string = folderName;
+      const LIB_PATH: string = `src/library/${LIB_NAME}`;
       if (!fs.existsSync(LIB_PATH)) {
         fs.mkdirSync(LIB_PATH);
       }
-      const LIB_FILE_NAME = fileName;
-      const LIB_FILE_PATH = `src/library/${LIB_NAME}/${LIB_FILE_NAME}.lib.js`;
+      const LIB_FILE_NAME: string = fileName;
+      const LIB_FILE_PATH: string = `src/library/${LIB_NAME}/${LIB_FILE_NAME}.lib.js`;
 
       if (fs.existsSync(LIB_FILE_PATH)) {
         //throw new Error(chalk.red(`library file name  already exists: ${LIB_FILE_PATH}`));
@@ -102,7 +103,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
           LIB_FILE_NAME.charAt(0).toUpperCase() + LIB_FILE_NAME.slice(1)
         );
 
-      let Path = path.resolve(process.cwd(), `${LIB_PATH}/${LIB_FILE_NAME}.lib.js`);
+      let Path: string = path.resolve(process.cwd(), `${LIB_PATH}/${LIB_FILE_NAME}.lib.js`);
       fs.writeFileSync(
         path.resolve(process.cwd(), `${LIB_PATH}/${LIB_FILE_NAME}.lib.js`),
         executeFileContents
