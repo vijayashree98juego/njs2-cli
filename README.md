@@ -54,6 +54,9 @@ oclif-cli upgrade --version=2.1.0
 ```
 ![Screenshot from 2023-10-25 16-13-45](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/f3230549-ff1b-4794-b293-80eeef23bfc5)
 
+![Screenshot from 2023-11-02 13-07-38](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/ff815657-f3b8-4262-a6b5-08b817a9fc0c)
+
+
 
 ## Creating an endpoint
 To create an endpoint go to project directory, then run `endpoint` command with endpoint name as an argument. This command will generate the structure for the endpoint.
@@ -77,6 +80,9 @@ The available options to run the project are listed below:
 ![Screenshot from 2023-10-25 16-12-25](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/92c432ef-384e-4da6-bca3-7e240427b367)
 
  This will generate the postman definition and start the API and socket server and the postman definition is served at `'api_base_url'/postman` endpoint.
+
+ ![Screenshot from 2023-11-02 11-17-53](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/60867a0c-4ea6-435e-9c51-3f9e56f4cc53)
+
 
 ## Creating a library
 To create a library go to project directory, then run `library` command with folderName and fileName. This command will generate new library helper file.
@@ -113,9 +119,13 @@ Description:
 
 ```install``` -> This command takes plugin name if provided or install all private plugins by reading the package.json file.
 
-![Screenshot from 2023-10-25 16-06-15](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/ff116c1f-814c-443e-8f7d-03db6369ca8e)
+![Screenshot from 2023-11-02 12-59-13](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/ec614373-e995-4b39-b35e-bd192695d86d)
+
 
 ```uninstall``` -> This command uninstall plugin.
+
+![Screenshot from 2023-11-02 13-01-50](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/5dfe4cd4-e8ae-4de9-873e-79b855937700)
+
 
 ```compile``` -> This command prepares compiled folders of the plugin for multiple node versions and uploads only the compiled code of the Private Plugin created in the ”dist” directory to Juego Registry.
 
@@ -130,7 +140,8 @@ If NVM is not installed locally,then process will terminate
 
 Once the compilation is sucess, cli will prompt for publishing the plugin Juego Registry as mentioned below
 
-![Screenshot from 2023-10-25 16-11-31](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/e1b853ed-ca8d-4c82-9e23-821991f948dc)           
+![Screenshot from 2023-11-02 13-03-31](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/4a92dca5-e53f-4104-b9e3-985f8822a87b)
+       
                
 
 
