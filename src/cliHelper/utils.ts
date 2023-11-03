@@ -76,6 +76,8 @@ export const checkAndFindVersion: Function<boolean | string> = (CLI_ARGS: string
 }
 
 export const updateNodeModulesStructure: AsyncFunction<void> = async (pluginName: string) => {
+  // Initialize a loading spinner using the ora library.
+  // The spinner is created with the message "Copying files to root folder ... "
   const spinner: Ora = ora(`Copying files to root folder ... `);
   try {
     const nodeVersion: string = process.version.slice(1, 3);

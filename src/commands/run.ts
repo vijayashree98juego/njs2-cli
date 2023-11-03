@@ -5,13 +5,17 @@ import { Args, Flags, ux } from "@oclif/core";
 import inquirer from "inquirer";
 
 export default class run extends BaseCommand<typeof run> {
-  static description: string = "Running a server on port";
+  //provide description of command
+  static description = "Running a server on port";
 
-  static examples: string[] = ["oclif-cli run"];
+  //provide examples of command
+  static examples = ["oclif-cli run"];
 
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(run);
     const options: string[] = ["express", "nodemon", "serverless"];
+
+    //drop down option for serverType
     const serverType: { selectedOption: string } = await inquirer.prompt({
       type: "list",
       name: "selectedOption",

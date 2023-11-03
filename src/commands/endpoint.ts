@@ -2,10 +2,13 @@ import { BaseCommand } from '@oclif-cli/executors/endpoint.js';
 import { Args, Flags } from '@oclif/core'
 
 export default class endpoint extends BaseCommand<typeof endpoint> {
-  static description: string = "Creating a endpoint";
+  //provide description of command
+  static description = "Creating a endpoint";
 
-  static examples: string[] = ["oclif-cli endpoint user/detail"];
+  //provide examples of command
+  static examples = ["oclif-cli endpoint user/detail"];
 
+  //provide arguments of command
   static args = {
     endpointName: Args.string({ description: 'Enter endpoint', required: true }),
   }

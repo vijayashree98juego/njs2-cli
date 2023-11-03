@@ -10,6 +10,8 @@ import { ArrayProps, AsyncFunction } from '@oclif-cli/interface/index.js';
 const excludeFolders: ArrayProps<string> = ["node_modules", "package.json"];
 
 export const handler: AsyncFunction<void> = async (pluginName: string) => {
+  // Initialize a loading spinner using the ora library.
+  // The spinner is created with the message "Installing plugin for node version 12 ... "
   const spinner: Ora = ora(`Installing plugin for node version ${process.versions.node} ... `);
   try {
 

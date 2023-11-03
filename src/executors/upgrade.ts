@@ -10,6 +10,8 @@ import { PackageJonProps } from "@oclif-cli/interface/index.js";
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
   async execute(version: string | undefined | void): Promise<void> {
+    // Initialize a loading spinner using the ora library.
+    // The spinner is created with the message "Upgrading njs2 base ..."
     const spinner: Ora = ora(`Upgrading njs2 base ... `);
 
     try {

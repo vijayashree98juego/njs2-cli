@@ -6,6 +6,8 @@ import chalk from "chalk";
 import { ArrayProps, AsyncFunction, PackageJonProps } from "@oclif-cli/interface/index.js";
 
 export const handler: AsyncFunction<void> = async (pluginName: string) => {
+  // Initialize a loading spinner using the ora library.
+  // The spinner is created with the message "Uninstalling plugin for node version 12 ... "
   const spinner: Ora = ora(`Uninstalling plugin for node version ${process.versions.node} ... `);
   try {
     if (!fs.existsSync(`${path.resolve(`./package.json`)}`)) {

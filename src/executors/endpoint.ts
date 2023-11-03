@@ -8,6 +8,8 @@ import { ArrayProps, PackageJonProps } from '@oclif-cli/interface/index.js'
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
   async execute(argName: string): Promise<void> {
+    // Initialize a loading spinner using the ora library.
+    // The spinner is created with the message "Creating a endpoint..."
     const spinner: Ora = ora(`Creating a endpoint... `);
     try {
       if (!fs.existsSync(`${path.resolve(process.cwd(), `package.json`)}`)) {

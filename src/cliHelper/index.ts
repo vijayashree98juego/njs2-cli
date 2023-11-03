@@ -5,8 +5,6 @@ const commandTemplate: Function<string> = (commandName: string) => {
     import {Args, Flags} from '@oclif/core'
     import { BaseCommand } from "@oclif-cli/executors/${commandName}.js";
 
-    type argProps =  {[key:string]:string};
-
     export default class ${commandName} extends BaseCommand<typeof ${commandName}> {
         static description = "Creating a ${commandName}";
       

@@ -7,6 +7,8 @@ import { AsyncFunction } from '@oclif-cli/interface/index.js';
 
 
 export const handler: AsyncFunction<void> = async (pluginName: string) => {
+  // Initialize a loading spinner using the ora library.
+  // The spinner is created with the message "Creating a package ..."
   const spinner: Ora = ora(`Creating a package ... `);
   try {
     const PLUGIN_NAME: string = pluginName;

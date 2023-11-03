@@ -54,7 +54,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       console.log(
         `\nAbout to write to ${path.resolve(
           process.cwd(),
-          `${PROJECT_NAME}/package.json`
+          `${packageName ? packageName : PROJECT_NAME}/package.json`
         )}`
       );
 

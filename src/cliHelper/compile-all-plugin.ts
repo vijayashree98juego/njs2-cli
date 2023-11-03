@@ -65,6 +65,7 @@ const getVersionManagerChoice: AsyncFunction<void> = async () => {
 
 /** * @description * njs2 compile * */
 export const handler: AsyncFunction<void> = async () => {
+  // Initialize a loading spinner using the ora library.
   let spinner: Ora = ora();
   try {
 

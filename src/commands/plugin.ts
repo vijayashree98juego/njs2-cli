@@ -5,14 +5,18 @@ import { BaseCommand } from '@oclif-cli/executors/plugin.js';
 
 
 export default class plugin extends BaseCommand<typeof plugin> {
-  static description: string = "Plugin Commands";
+  //provide description of command
+  static description = "Plugin Commands";
 
-  static examples: string[] = ["oclif-cli plugin"];
+  //provide examples of command
+  static examples = ["oclif-cli plugin"];
 
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(plugin);
     const options: string[] = ["create", "install", "uninstall", "compile"];
     let pluginName: string | undefined;
+
+    //drop down options for pluginAction
     const pluginAction: { selectedOption: string } = await inquirer.prompt({
       type: "list",
       name: "selectedOption",
@@ -20,10 +24,11 @@ export default class plugin extends BaseCommand<typeof plugin> {
       choices: options,
     });
 
+    //If selected pluginAction is install then plugin name is optional 
     if (pluginAction.selectedOption == 'install') {
       pluginName = await ux.prompt(`Enter the Plugin Name to ${pluginAction.selectedOption} or press "enter" to install all default plugins`, { required: false });
     }
-    else if (pluginAction.selectedOption != "compile") {
+    else if (pluginAction.selectedOption != "compile") { //plugin name is mandatory other than compile action
       pluginName = await ux.prompt(`Enter the Plugin Name to ${pluginAction.selectedOption}`, { required: true });
     }
 

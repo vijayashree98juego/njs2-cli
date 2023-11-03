@@ -9,6 +9,8 @@ import { PackageJonProps } from "@oclif-cli/interface/index.js";
 
 export abstract class BaseCommand<T extends typeof Command> extends Command {
   async execute(folderName: string, fileName: string, serverType: string | undefined | void): Promise<void> {
+    // Initialize a loading spinner using the ora library.
+    // The spinner is created with the message "Creating a library..."
     const spinner: Ora = ora(`Creating a library... `);
     try {
       if (!fs.existsSync(`${path.resolve(process.cwd(), `package.json`)}`)) {

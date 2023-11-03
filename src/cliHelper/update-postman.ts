@@ -17,6 +17,8 @@ export default class updatePostman {
   }
 
   async postmanCollectionHelper() {
+    // Initialize a loading spinner using the ora library.
+    // The spinner is created with the message "Processing collection ..."
     const spinner: Ora = ora(`Processing collection ... `).start();
     try {
       const packageJsonContent: ExecaReturnValue<string> = await execa(
