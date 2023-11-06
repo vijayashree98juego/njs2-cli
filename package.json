@@ -10,6 +10,7 @@
     "aws-sdk": "^2.1477.0",
     "bytenode": "^1.5.2",
     "chalk": "^5.3.0",
+    "cli-table": "^0.3.11",
     "execa": "^8.0.1",
     "fs-extra": "^11.1.1",
     "inquirer": "^9.2.11",
@@ -26,6 +27,7 @@
     "@oclif/test": "^3",
     "@types/chai": "^4",
     "@types/cli-progress": "^3.11.4",
+    "@types/cli-table": "^0.3.3",
     "@types/colors": "^1.2.1",
     "@types/fs-extra": "^11.0.2",
     "@types/inquirer": "^9.0.4",
@@ -65,10 +67,17 @@
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
     ],
+    "helpClass": "./dist/cliHelper/helper-class",
     "topicSeparator": " ",
     "topics": {
       "hello": {
         "description": "Say hello to the world and others"
+      },
+      "project": {
+        "description": "yes here"
+      },
+      "project12": {
+        "description": "yes hereewe"
       }
     }
   },

@@ -36,7 +36,11 @@ export type userProps<S, N, B> = { [key: string]: S | N | B }
 export type paramsProps = {
   RoleArn: string,
   RoleSessionName: string,
+}
 
+export  interface cliTopicProps {
+  name?:string;
+  description?:string;
 }
 declare global {
   var baseInitialize: any;
