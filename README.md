@@ -12,9 +12,18 @@ npm i -g @juego/oclif-cli --registry= http://plugins.juegogames.com/
 ## Getting started with CLI
 Once the cli is installed, you can directly start working with CLI using `oclif-cli
 ` command.
+
+To get an overview of all available commands:
 ```
 oclif-cli --help
 ```
+![Screenshot from 2023-11-07 12-33-55](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/53ee3011-af44-4350-ab99-5cf325adc912)
+
+To get an overview of each available commands:
+```
+oclif-cli project --help
+```
+![Screenshot from 2023-11-07 12-35-41](https://github.com/vijayashree98juego/njs2-cli/assets/125428593/018a78f8-6c05-43fd-8979-149fa4d6de11)
 
 ## Creating a new Project
 To create a new project, run `project` command with project name as an argument. 
